@@ -45,7 +45,7 @@ export default defineConfig(({ mode, command}) => {
     resolve: {
       // 路径别名配置（类似于Webpack 的 alias）
       alias: {
-        // '~' 指向项目根目录
+        // '~' 指向项目根目录（vue）
         '~': path.resolve(__dirname, './'),
 
         // '@' 指向 src 目录（最常用）
