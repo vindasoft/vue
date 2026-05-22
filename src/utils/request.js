@@ -64,18 +64,18 @@ service.interceptors.request.use(
             config.headers['Authorization'] = 'Bearer ' + getToken()
 
             // 防止重复提交
-            if(!isRepeatSubmit && ['post','put'].includes(config.method)) {
+            if (!isRepeatSubmit && ['post', 'put'].includes(config.method)) {
                 // 创建当前请求的身份证
                 const requestObj = {
                     url: config.url,
-                    data: typeof config.data === 'object'? JSON.stringify(config.data): config.data,
+                    data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
                     time: new Date().getTime()
                 }
             }
 
             // 从浏览器临时存储中取出上一次的请求记录
             const sessionValue = sessionStorage.getItem('sessionObj')
-            const sessionObj = sessionValue? JSON.parse(sessionValue): null
+            const sessionObj = sessionValue ? JSON.parse(sessionValue) : null
 
             // 如果上次有请求记录
             if (sessionObj) {
@@ -98,7 +98,7 @@ service.interceptors.request.use(
         // 处理完所有请求，放行请求
         return config
     },
-    error =>{
+    error => {
         ElMessage.error(error)
     }
 )
@@ -108,8 +108,8 @@ service.interceptors.request.use(
  */
 service.interceptors.response.use(
     res => {
-        if(['blob'].includes(res.request.responseType)) {
-             // 直接返回原始数据（不需要后续业务逻辑处理）
+        if (['blob'].includes(res.request.responseType)) {
+            // 直接返回原始数据（不需要后续业务逻辑处理）
             return res.data
         }
 
@@ -124,7 +124,7 @@ service.interceptors.response.use(
         }
 
         // 如果不是200
-        if(code !== '200') {
+        if (code !== '200') {
             ElMessage.error(msg)
             return Promise.reject(new Error(msg))
         }
@@ -134,19 +134,19 @@ service.interceptors.response.use(
 
     error => {
         // 这里处理网络Http错误（ex 500,404等）
-        let {message,response} = error
+        let {message, response} = error
 
         // 1、404错误
-        if(response?.status === '404') {
+        if (response?.status === '404') {
             handleReLogin()
             return Promise.reject('登录已过期，请重新登录')
         }
 
         // 2、错误信息翻译
         const errMap = {
-            'Network Error' : '后端接口连接异常',
-            'timeout':'系统接口请求超时',
-            'Request failed with status code': '系统接口'+message.substr(message,length - 1) + '异常'
+            'Network Error': '后端接口连接异常',
+            'timeout': '系统接口请求超时',
+            'Request failed with status code': '系统接口' + message.substr(message, length - 1) + '异常'
         }
 
         // 3、遍历错误映射表，匹配错误信息
