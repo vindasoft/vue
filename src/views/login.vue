@@ -32,6 +32,7 @@
 
 <script setup>
     import {ref} from 'vue'
+    import {login} from "@/api/login";
 
     // 表单实例
     const loginRef = ref()
@@ -60,8 +61,12 @@
         loginRef.value.validate(valid => {
             if(valid) {
               // 打开加载状态
-              loading.value = true;
+              loading.value = true
               // 调用登录方法TODO
+              // console.log(loginForm.value,'看看用户输入的用户名和密码')
+              login(loginForm.value).then(resp =>{
+
+              })
             }
         })
     }
@@ -72,9 +77,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 200vh;
+    width: 100%;
     height: 100vh;
-    background: url("../assets/images/login_bg.png") no-repeat center;
+    background: url("@/assets/images/login_bg.png") no-repeat center;
     background-size: cover;
     position: relative;
   }

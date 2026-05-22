@@ -21,6 +21,6 @@ state.count = 10
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background: url("../assets/images/login_bg.png") no-repeat center;
+  background: url("@/assets/images/login_bg.png") no-repeat center;
 }
 </style>
