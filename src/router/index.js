@@ -8,7 +8,7 @@ export const constantRouters = [
   {
     path: '/login',
     component: () => import('@/views/login'),
-    hidden: true
+    hidden: true // 左侧不再显示该login组件
   },
   {
     path: '/register',

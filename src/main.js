@@ -1,10 +1,12 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
+// npm install element-plus --save
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
 
-// 如果您正在使用CDN引入，请删除下面一行。
+// npm install @element-plus/icons-vue
+// 注册图标：如果您正在使用CDN引入，请删除下面一行。
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'
 
 // 导入ElementPlus的中文语言包
@@ -18,12 +20,14 @@ import './routercheck'
 
 const app = createApp(App)
 
+// 注册状态管理
 app.use(createPinia())
 app.use(router)
 
+// 注册ElementPlus
 app.use(ElementPlus)
 
-// 遍历Element Plus所有图标组件并注册
+// 遍历Element Plus所有图标组件并且全部注册
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
 }

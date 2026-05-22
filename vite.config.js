@@ -60,6 +60,7 @@ export default defineConfig(({ mode, command}) => {
           '.jsx', // React JSX
           '.tsx', // TypeScript JSX
           '.json', // JSON 文件
+          '.png', // PNG文件
           '.vue' // vue 单文件组件
       ]
     },
