@@ -1,6 +1,7 @@
 import axios from 'axios'
-import {ElMessage, ElMessageBox} from "element-plus"
-import {getToken} from "@/utils/auth.js"
+import {ElMessage, ElMessageBox} from 'element-plus'
+import {getToken} from '@/utils/auth.js'
+import useUserStore from '@/stores/modules/userStore.js'
 
 /**
  * 第一部分：全局设置
@@ -42,6 +43,11 @@ const handleReLogin = () => {
         .then(() => {
             // 点击了重新登录按钮，返回重新登录页面
             isReLogin.show = false
+            // 调用退出登录的方法（清空用户信息）
+            useUserStore().logout().then(() => {
+                // 退出后重新跳转到登录页面
+                location.href = '/login'
+            })
         })
         .catch(() => {
             // 点击了取消按钮，还是在当前页面
@@ -62,15 +68,14 @@ service.interceptors.request.use(
         if (getToken() && isToken) {
             // 在请求头里面加上token
             config.headers['Authorization'] = 'Bearer ' + getToken()
-
-            // 防止重复提交
-            if (!isRepeatSubmit && ['post', 'put'].includes(config.method)) {
-                // 创建当前请求的身份证
-                const requestObj = {
-                    url: config.url,
-                    data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
-                    time: new Date().getTime()
-                }
+        }
+        // 2、防止重复提交
+        if (!isRepeatSubmit && ['post', 'put'].includes(config.method)) {
+            // 创建当前请求的身份证
+            const requestObj = {
+                url: config.url,
+                data: typeof config.data === 'object' ? JSON.stringify(config.data) : config.data,
+                time: new Date().getTime()
             }
 
             // 从浏览器临时存储中取出上一次的请求记录
@@ -94,7 +99,6 @@ service.interceptors.request.use(
             // 不是重复提交，就保持这次请求记录（用于下次比较）
             sessionStorage.setItem('sessionObj', JSON.stringify(requestObj))
         }
-
         // 处理完所有请求，放行请求
         return config
     },

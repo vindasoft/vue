@@ -1,5 +1,5 @@
-import { createApp } from 'vue'
-import { createPinia } from 'pinia'
+import {createApp} from 'vue'
+import {createPinia} from 'pinia'
 
 // npm install element-plus --save
 import ElementPlus from 'element-plus'
@@ -17,6 +17,7 @@ import router from './router'
 
 // 引入路由守卫
 import './routercheck'
+import {store} from "@/stores/index.js";
 
 const app = createApp(App)
 
@@ -26,6 +27,9 @@ app.use(router)
 
 // 注册ElementPlus
 app.use(ElementPlus)
+
+// 注册store仓库
+app.use(store)
 
 // 遍历Element Plus所有图标组件并且全部注册
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
