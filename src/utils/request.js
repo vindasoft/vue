@@ -61,7 +61,7 @@ const handleReLogin = () => {
 service.interceptors.request.use(
     config => {
         // 检查是否需要添加token（有些请求不需要身份认证）
-        const isToken = config.headers?.isToken !== false
+        const isToken = config.headers?.isNeedToken !== false
         const isRepeatSubmit = config.headers?.repeatSubmit !== false
 
         // 如果有token，并且这个请求需要token

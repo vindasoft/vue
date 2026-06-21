@@ -22,8 +22,9 @@ export const constantRouters = [
     redirect: 'index',
     children: [
       {
-        path: 'index',
+        path: '/index',
         name: 'Index',
+        component: () => import('@/views/layout/index.vue'),
         meta: { title: '首页' }
       },
     ],

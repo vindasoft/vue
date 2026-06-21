@@ -6,7 +6,7 @@ import { createPinia } from 'pinia'
  * 作用：整个应用共享的状态管理中心，就像公司的“总档案库”，所有部门都可以在这里存储共享数据
  * Pinia是vue3.x的官方推荐状态管理工具
  */
-export const store = createPinia()
+const store = createPinia()
 
 // 导出仓库实例
-// export default store
+export default store

@@ -7,7 +7,7 @@ export function login(data) {
     return request({
         url: '/login',
         headers: {
-            isToken: false, // 告诉拦截器，这个请求不需要token
+            isNeedToken: false, // 告诉拦截器，这个请求不需要token
         },
         method: 'post', // 请求方法 post请求
         data: data

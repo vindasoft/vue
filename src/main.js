@@ -17,7 +17,7 @@ import router from './router'
 
 // 引入路由守卫
 import './routercheck'
-import {store} from "@/stores/index.js";
+import store from "@/stores/index.js";
 
 const app = createApp(App)
 

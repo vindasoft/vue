@@ -69,11 +69,13 @@ const handleLogin = () => {
       loading.value = true
 
       // 调用登录方法
-      // console.log(loginForm.value,'看看用户输入的用户名和密码')
+      console.log(loginForm.value,'看看用户输入的用户名和密码')
       userStore.login(loginForm.value).then(resp => {
+        console.log('--------------------login 成功！')
         const redirectPath = '/'
         router.push(redirectPath)
       }).catch(() => {
+        console.log('--------------------login 失败')
         loading.value = false
       })
     }

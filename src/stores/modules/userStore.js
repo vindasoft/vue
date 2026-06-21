@@ -31,10 +31,10 @@ const useUserStore = defineStore(
                     login(userInfo).then(res => {
                         // 登录成功
                         // 1、保存token
-                        setToken(res.token)
+                        setToken(res.data)
 
                         // 2、更新store中的token
-                        this.token = res.token
+                        this.token = res.data
 
                         // 3、告诉调用者成功了
                         resolve()
@@ -56,7 +56,7 @@ const useUserStore = defineStore(
                         // 获取用户信息成功
                         // 1、保存用户信息
                         const user = res.data
-                        let avatar = user.remark || ""
+                        let avatar = user.avatar
 
                         // 判断头像地址是否完整（是否包含http://或者https://）
                         if (avatar.indexOf('http://') === -1 && avatar.indexOf('https://') === -1) {
